@@ -5,7 +5,7 @@ using UnityEngine;
 public class KnobControl : MonoBehaviour {
 
     //Game Object for emitters
-    public GameObject laser;
+    public GameObject emitter;
 
     //Rotation of control knob and emitter
     public Quaternion rot;
@@ -22,7 +22,7 @@ public class KnobControl : MonoBehaviour {
 	void Update () {
         //Rotations for knobs and emitters are updated
         rot = transform.rotation;
-        laser.transform.rotation = rot;
+        emitter.transform.rotation = rot;
     }
 
     //For turning the knobs

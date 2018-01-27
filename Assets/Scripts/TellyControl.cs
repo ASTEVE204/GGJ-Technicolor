@@ -14,15 +14,24 @@ public class TellyControl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //set emitters to no particle effect
-	}
+        //particle lasers will be turned off
+        redLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+        greenLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+        blueLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (powerOn == true) {
-            //set emitters to have particle effect
+            //if the power switch is toggled on, particle lasers will be turned on
+            redLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = true;
+            greenLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = true;
+            blueLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = true;
         } else {
-            //set emitters to no particle effect
+            //if the power switch is toggled off, particle lasers will be turned off
+            redLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+            greenLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+            blueLaser.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
         }
     }
 
