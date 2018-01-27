@@ -38,10 +38,10 @@ public class TellyControl : MonoBehaviour {
     void OnMouseDown () {
         GameObject powerSwitch = this.gameObject;
         if (powerOn == false) {
-            powerSwitch.transform.eulerAngles = new Vector3(0, -11.25f, 0);
+            powerSwitch.transform.eulerAngles = new Vector3(-90f, 0, -32.773f);
             powerOn = true;
         } else {
-            powerSwitch.transform.eulerAngles = new Vector3(0, 11.25f, 0);
+            powerSwitch.transform.eulerAngles = new Vector3(-90f, 0, 32.773f);
             powerOn = false;
         }
     }
