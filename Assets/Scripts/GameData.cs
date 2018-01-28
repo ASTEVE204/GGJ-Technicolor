@@ -5,16 +5,9 @@ using UnityEngine;
 public class GameData : MonoBehaviour {
 
     //variables declared as public to be accessed by other scripts
-    public bool hasGun;
-    public bool hasTorch;
     public float masterVolume;
-    public int playerHealth;
-    public int targetsDestroyed;
-    public int cumulativeScore;
-    public int loadedAmmo;
-    public int reserveAmmo;
-    public string lastLevel;
-    public string playerName;
+    public int totalClicks;
+    public int lastLevel;
 
     // Use this for initialization
     void Start() {
