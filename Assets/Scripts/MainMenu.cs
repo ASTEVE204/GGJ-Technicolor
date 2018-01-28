@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
             gameDataScript.masterVolume = volume;
 
         }
-        //audio.Play();
+        audio.Play();
         yield return new WaitForSeconds(audio.clip.length);
         Application.LoadLevel("Level1");
     }
