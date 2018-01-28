@@ -6,7 +6,8 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour {
 
     //Volume to be edited by slider
-    float volume;
+    //public Slider volumeSlider;
+    float volume = 0.5f;
 
     //plays an audio clip and then switches to the main level when a button is clicked
     IEnumerator GameAfterAudio() {
@@ -17,8 +18,8 @@ public class MainMenu : MonoBehaviour {
             gameDataScript.masterVolume = volume;
 
         }
-        audio.Play();
-        yield return new WaitForSeconds(audio.clip.length);
+        //audio.Play();
+        yield return new WaitForSeconds(/*audio.clip.length*/1);
         Application.LoadLevel("Level1");
     }
 
@@ -26,19 +27,34 @@ public class MainMenu : MonoBehaviour {
     IEnumerator HelpAfterAudio() {
         //determines if persistent data exists and assigns to it the data from the private variables
         GameObject gameData = GameObject.Find("GameDataObject");
-        if (gameData != null) {
+        if (gameData != null)
+        {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.masterVolume = volume;
         }
-        audio.Play();
-        yield return new WaitForSeconds(audio.clip.length);
+        //audio.Play();
+        yield return new WaitForSeconds(/*audio.clip.length*/1);
         Application.LoadLevel("Help");
+    }
+
+    //plays an audio clip and then switches to the options menu when a button is clicked
+    IEnumerator CreditsAfterAudio() {
+        //determines if persistent data exists and assigns to it the data from the private variables
+        GameObject gameData = GameObject.Find("GameDataObject");
+        if (gameData != null)
+        {
+            GameData gameDataScript = gameData.GetComponent<GameData>();
+            gameDataScript.masterVolume = volume;
+        }
+        //audio.Play();
+        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        Application.LoadLevel("Credits");
     }
 
     //plays an audio clip and then exits the game when a button is clicked
     IEnumerator QuitAfterAudio() {
-        audio.Play();
-        yield return new WaitForSeconds(audio.clip.length);
+        //audio.Play();
+        yield return new WaitForSeconds(/*audio.clip.length*/1);
         Application.Quit();
     }
 
@@ -50,6 +66,11 @@ public class MainMenu : MonoBehaviour {
     //starts the corresponding coroutine when the button to which it is assigned is clicked
     public void LoadHelp() {
         StartCoroutine(HelpAfterAudio());
+    }
+
+    //starts the corresponding coroutine when the button to which it is assigned is clicked
+    public void LoadCredits() {
+        StartCoroutine(CreditsAfterAudio());
     }
 
     //starts the corresponding coroutine when the button to which it is assigned is clicked
@@ -66,28 +87,10 @@ public class MainMenu : MonoBehaviour {
             gameData = new GameObject("GameDataObject");
             gameData.AddComponent<GameData>();
             volume = 0.5f;
-            //... otherwise, the player's name and the master volume are assigned from it to the private variables
         } else {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             volume = gameDataScript.masterVolume;
             gameDataScript.masterVolume = volume;
-        }
-        //determines if persistent data exists...
-        GameObject musicObject = GameObject.Find("MusicObject");
-        //... if it does not, an object in which to store persistent data is created, and the background music to be stored in it is played
-        if (musicObject == null) {
-            musicObject = new GameObject("MusicObject");
-            musicObject.AddComponent<MusicControl>();
-            AudioSource menuMusic = musicObject.AddComponent<AudioSource>();
-            menuMusic.clip = Resources.Load("Sound/ArcticMonkeys-SecretDoor") as AudioClip;
-            menuMusic.loop = true;
-            menuMusic.Play();
-        }
-
-        if (musicObject != null) {
-            MusicControl musicScript = musicObject.GetComponent<MusicControl>();
-            musicScript.gameLevel = false;
-
         }
     }
 
@@ -99,5 +102,8 @@ public class MainMenu : MonoBehaviour {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.masterVolume = volume;
         }
+
+        //updates the assigned the value of volume to the volume slider each frame to allow for live interaction between the player-modifed volume and the playing music
+        //volume = volumeSlider.value;
     }
 }

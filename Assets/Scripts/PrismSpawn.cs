@@ -5,7 +5,7 @@ using UnityEngine;
 public class PrismSpawn : MonoBehaviour {
 
     //Boolean to check if win condition met
-    bool levelComplete = false;
+    public bool levelComplete = false;
 
     //White light particle effect
     public GameObject whiteLight;
@@ -39,7 +39,7 @@ public class PrismSpawn : MonoBehaviour {
             if (objectTag == remaingColours[i]) {
                 remaingColours.RemoveAt(i);
                 //and if that clears out the list completely, trigger the endgame
-                if (remaingColours == null) {
+                if (remaingColours.Count == 0) {
                     levelComplete = true;
                 }
             }

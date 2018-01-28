@@ -28,6 +28,12 @@ public class MirrorControlNeg : MonoBehaviour {
 
     void OnMouseDown() {
         if (tellyControl.powerOn == false) {
+            //determines if persistent data exists; displays the player's name, health and score values, and calculates a final score from it; then assigns the information to different text fields
+            GameObject gameData = GameObject.Find("GameDataObject");
+            if (gameData != null) {
+                GameData gameDataScript = gameData.GetComponent<GameData>();
+                gameDataScript.totalClicks++;
+            }
             Vector3 clickedPos = mirror.transform.position;
             if (vertical == true) {
                 if (clickedPos.y > minPoint + 0.1f) {

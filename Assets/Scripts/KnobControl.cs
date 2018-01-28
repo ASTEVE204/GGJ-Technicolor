@@ -35,6 +35,12 @@ public class KnobControl : MonoBehaviour
     void OnMouseDown() {
         //Knob, when tapped, rotates by 22.5° around z-axis
         if (tellyControl.powerOn == false) {
+            //determines if persistent data exists; displays the player's name, health and score values, and calculates a final score from it; then assigns the information to different text fields
+            GameObject gameData = GameObject.Find("GameDataObject");
+            if (gameData != null) {
+                GameData gameDataScript = gameData.GetComponent<GameData>();
+                gameDataScript.totalClicks++;
+            }
             Vector3 clickedEuler = this.gameObject.transform.eulerAngles;
             if (clickedEuler.z < 157.5f) {
                 this.gameObject.transform.eulerAngles = new Vector3(clickedEuler.x, clickedEuler.y, clickedEuler.z + 22.5f);

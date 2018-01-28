@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Credits.cs" />
      <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\GameData.cs" />
      <Compile Include="Assets\Scripts\HelpScreen.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\MirrorControlPos.cs" />
      <Compile Include="Assets\Scripts\MusicControl.cs" />
      <Compile Include="Assets\Scripts\PrismSpawn.cs" />
+     <Compile Include="Assets\Scripts\Receiver.cs" />
      <Compile Include="Assets\Scripts\Startup.cs" />
      <Compile Include="Assets\Scripts\TellyControl.cs" />
  <Reference Include="UnityEngine.UI">

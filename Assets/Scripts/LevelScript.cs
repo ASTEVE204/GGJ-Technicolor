@@ -3,44 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelScript : MonoBehaviour {
-	
-	public GameObject snow;
-	public PrismSpawn[] prismSpawns;
-	bool levelComplete = false;
-	bool[] prismsComplete;
-	bool[] finisheds;
 
-// Use this for initialization
-void Start () {
-	//determines if persistent data exists...
-	GameObject musicObject = GameObject.Find("MusicObject");
-	if (musicObject != null) {
-	    MusicControl musicScript = musicObject.GetComponent<MusicControl>();
-	    musicScript.gameLevel = true;
-	}
-	audio.Play();
-	finisheds = new bool[prismSpawns.length];
-	foreach (bool finished in finisheds) {
-		finished = true;
-	}
-}
-	
-// Update is called once per frame
-    void Update() {
-        //changes volume of sound to match volume stored in pers.data
-        GameObject gameData = GameObject.Find("GameDataObject");
+    // Use this for initialization
+    void Start () {
+        //determines if persistent data exists...
+        GameObject gameData = GameObject.Find("GameData");
         if (gameData != null) {
-            	GameData gameDataScript = gameData.GetComponent<GameData>();
-            	gameDataScript.lastLevel = "";
+            GameData gameDataScript = gameData.GetComponent<GameData>();
+            gameDataScript.lastLevel = Application.loadedLevelName;
         }
-	for (int i = 0; i < prismSpawns.length; i++) {
-		if (prismSpawns[i].levelComplete == true) {
-			prismsComplete[i] = true;
-		}
-	}
-	levelComplete = ArrayEquals(prismSpawns, finisheds);
-	if (levelComplete == true) {
-		snow.setActive(true);
-	}
+        //determines if persistent data exists...
+        GameObject musicObject = GameObject.Find("MusicObject");
+	    if (musicObject != null) {
+	        MusicControl musicScript = musicObject.GetComponent<MusicControl>();
+	        musicScript.gameLevel = true;
+	    }
+	    //audio.Play();
+    }
+
+    // Update is called once per frame
+    void Update() {
+
     }
 }
