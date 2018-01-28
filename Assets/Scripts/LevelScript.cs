@@ -12,6 +12,12 @@ public class LevelScript : MonoBehaviour {
 
 // Use this for initialization
 void Start () {
+	//determines if persistent data exists...
+	GameObject musicObject = GameObject.Find("MusicObject");
+	if (musicObject != null) {
+	    MusicControl musicScript = musicObject.GetComponent<MusicControl>();
+	    musicScript.gameLevel = true;
+	}
 	audio.Play();
 	finisheds = new bool[prismSpawns.length];
 	foreach (bool finished in finisheds) {
