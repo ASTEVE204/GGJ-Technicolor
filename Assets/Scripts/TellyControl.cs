@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TellyControl : MonoBehaviour {
 
+    //Array of prism scripts
+    public PrismSpawn[] prismSpawns;
+
     //Game Object for emitters
     public GameObject redLaser;
     public GameObject greenLaser;
@@ -35,14 +38,24 @@ public class TellyControl : MonoBehaviour {
         }
     }
 
+    //When clicking on the switch
     void OnMouseDown () {
-        GameObject powerSwitch = this.gameObject;
         if (powerOn == false) {
-            powerSwitch.transform.eulerAngles = new Vector3(-90f, 0, -32.773f);
+            //turn the TV on
+            this.gameObject.transform.eulerAngles = new Vector3(-90f, 0, -32.773f);
             powerOn = true;
+            //and refill the list of colours still to hit the prism
+            foreach (PrismSpawn prismSpawn in prismSpawns) {
+                prismSpawn.MakeTheList();
+            }
         } else {
-            powerSwitch.transform.eulerAngles = new Vector3(-90f, 0, 32.773f);
+            //turn the TV off
+            this.gameObject.transform.eulerAngles = new Vector3(-90f, 0, 32.773f);
             powerOn = false;
+            //and clear out the list of colours still to hit the prism
+            foreach (PrismSpawn prismSpawn in prismSpawns) {
+                prismSpawn.remaingColours.Clear();
+            }
         }
     }
 }

@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\KnobControl.cs" />
+     <Compile Include="Assets\Scripts\MirrorControl.cs" />
+     <Compile Include="Assets\Scripts\MirrorControlNeg.cs" />
+     <Compile Include="Assets\Scripts\MirrorControlPos.cs" />
+     <Compile Include="Assets\Scripts\PrismSpawn.cs" />
      <Compile Include="Assets\Scripts\TellyControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

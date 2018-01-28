@@ -35,14 +35,13 @@ public class KnobControl : MonoBehaviour
     void OnMouseDown() {
         //Knob, when tapped, rotates by 22.5° around z-axis
         if (tellyControl.powerOn == false) {
-            GameObject knob = this.gameObject;
-            Vector3 clickedEuler = knob.transform.eulerAngles;
+            Vector3 clickedEuler = this.gameObject.transform.eulerAngles;
             if (clickedEuler.z < 157.5f) {
-                knob.transform.eulerAngles = new Vector3(clickedEuler.x, clickedEuler.y, clickedEuler.z + 22.5f);
+                this.gameObject.transform.eulerAngles = new Vector3(clickedEuler.x, clickedEuler.y, clickedEuler.z + 22.5f);
             } else {
-                knob.transform.eulerAngles = new Vector3(clickedEuler.x, clickedEuler.y, 22.5f);
+                this.gameObject.transform.eulerAngles = new Vector3(clickedEuler.x, clickedEuler.y, 22.5f);
             }
-            rot = knob.transform.eulerAngles.z;
+            rot = this.gameObject.transform.eulerAngles.z;
         }
     }
 }
