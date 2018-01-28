@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour {
         }
         //audio.Play();
         yield return new WaitForSeconds(/*audio.clip.length*/1);
-        Application.LoadLevel("Level1");
+        Application.LoadLevel("Level 1");
     }
 
     //plays an audio clip and then switches to the options menu when a button is clicked

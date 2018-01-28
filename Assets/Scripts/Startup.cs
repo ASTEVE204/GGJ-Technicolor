@@ -12,12 +12,14 @@ public class Startup : MonoBehaviour {
     public Text presenting;
 
 	IEnumerator StartUpGame() {
-		background.texture = ggjSplash;
+        yield return new WaitForSeconds(2.5f);
+        background.texture = ggjSplash;
 		yield return new WaitForSeconds(2.5f);
         background.texture = teamSplash;
         presenting.enabled = true;
         yield return new WaitForSeconds(2.5f);
-		background.texture = gameSplash;
+        presenting.enabled = false;
+        background.texture = gameSplash;
 		yield return new WaitForSeconds(2.5f);
 		Application.LoadLevel("MainMenu");
 	}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Receiver : MonoBehaviour {
 
     public GameObject snow;
-    bool levelComplete = false;
+    public bool levelComplete = false;
 
     IEnumerator LevelCompleted() {
         //audio.Play();

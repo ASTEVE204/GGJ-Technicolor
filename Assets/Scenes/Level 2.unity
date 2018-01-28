@@ -2947,8 +2947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snow: {fileID: 1945919464}
-  prismSpawns:
-  - {fileID: 475741239}
+  levelComplete: 0
 --- !u!65 &1164761698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3070,6 +3069,11 @@ Prefab:
     - target: {fileID: 1432515306338480, guid: 8df776bf1afb24440a1e4c67d7bfcee2, type: 2}
       propertyPath: m_TagString
       value: EndParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 198874190078254752, guid: 8df776bf1afb24440a1e4c67d7bfcee2,
+        type: 2}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8df776bf1afb24440a1e4c67d7bfcee2, type: 2}
