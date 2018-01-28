@@ -5,55 +5,51 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
 
-    //the variable declared as public to be defined in the Unity Editor, the variables left private are used to store data below
-    public Text subjectName;
+    //Volume to be edited by slider
     float volume;
-    string nameText;
 
     //plays an audio clip and then switches to the main level when a button is clicked
-    IEnumerator MainLevelAfterAudio() {
+    IEnumerator GameAfterAudio() {
         //determines if persistent data exists and assigns to it the data from the private variables
         GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            gameDataScript.playerName = nameText;
             gameDataScript.masterVolume = volume;
 
         }
         //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
-        Application.LoadLevel("Experiment1");
+        yield return new WaitForSeconds(audio.clip.length);
+        Application.LoadLevel("Level1");
     }
 
     //plays an audio clip and then switches to the options menu when a button is clicked
-    IEnumerator OptionsAfterAudio() {
+    IEnumerator HelpAfterAudio() {
         //determines if persistent data exists and assigns to it the data from the private variables
         GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            gameDataScript.playerName = nameText;
             gameDataScript.masterVolume = volume;
         }
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
-        Application.LoadLevel("Options");
+        audio.Play();
+        yield return new WaitForSeconds(audio.clip.length);
+        Application.LoadLevel("Help");
     }
 
     //plays an audio clip and then exits the game when a button is clicked
     IEnumerator QuitAfterAudio() {
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        audio.Play();
+        yield return new WaitForSeconds(audio.clip.length);
         Application.Quit();
     }
 
     //starts the corresponding coroutine when the button to which it is assigned is clicked
-    public void LoadMainLevel() {
-        StartCoroutine(MainLevelAfterAudio());
+    public void StartGame() {
+        StartCoroutine(GameAfterAudio());
     }
 
     //starts the corresponding coroutine when the button to which it is assigned is clicked
-    public void LoadOptionsMenu() {
-        StartCoroutine(OptionsAfterAudio());
+    public void LoadHelp() {
+        StartCoroutine(HelpAfterAudio());
     }
 
     //starts the corresponding coroutine when the button to which it is assigned is clicked
@@ -69,12 +65,10 @@ public class MainMenu : MonoBehaviour {
         if (gameData == null) {
             gameData = new GameObject("GameDataObject");
             gameData.AddComponent<GameData>();
-            nameText = "89P13";
             volume = 0.5f;
             //... otherwise, the player's name and the master volume are assigned from it to the private variables
         } else {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            nameText = gameDataScript.playerName;
             volume = gameDataScript.masterVolume;
             gameDataScript.masterVolume = volume;
         }
@@ -95,8 +89,6 @@ public class MainMenu : MonoBehaviour {
             musicScript.gameLevel = false;
 
         }
-        //assigns the player's name after the word 'Subject' to a text field
-        subjectName.text = "Subject " + nameText;
     }
 
     // Update is called once per frame
@@ -105,7 +97,6 @@ public class MainMenu : MonoBehaviour {
         GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            gameDataScript.playerName = nameText;
             gameDataScript.masterVolume = volume;
         }
     }
