@@ -11,7 +11,7 @@ public class MasterVolume : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //determines if persistent data exists, and the master volume is assigned from it to the audio listener in the scene
+        //changes volume of sound to match volume stored in pers.data
         GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
