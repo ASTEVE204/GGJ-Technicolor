@@ -51,11 +51,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\EndGame.cs" />
+     <Compile Include="Assets\Scripts\GameData.cs" />
+     <Compile Include="Assets\Scripts\HelpScreen.cs" />
      <Compile Include="Assets\Scripts\KnobControl.cs" />
+     <Compile Include="Assets\Scripts\LevelScript.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MasterVolume.cs" />
      <Compile Include="Assets\Scripts\MirrorControl.cs" />
      <Compile Include="Assets\Scripts\MirrorControlNeg.cs" />
      <Compile Include="Assets\Scripts\MirrorControlPos.cs" />
+     <Compile Include="Assets\Scripts\MusicControl.cs" />
      <Compile Include="Assets\Scripts\PrismSpawn.cs" />
+     <Compile Include="Assets\Scripts\Startup.cs" />
      <Compile Include="Assets\Scripts\TellyControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
