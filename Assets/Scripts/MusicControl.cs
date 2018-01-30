@@ -11,8 +11,8 @@ public class MusicControl : MonoBehaviour {
     void Start() {
         //if the boolean above is false, music is played, the boolean is declared to be true, and the object containing the script is ensured to not be destroyed when the scene changes
         if (!musicPlaying) {
-            /*audio.Play();
-            audio.mute = false;*/
+            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().mute = false;
             DontDestroyOnLoad(this);
             musicPlaying = true;
         }
@@ -22,10 +22,10 @@ public class MusicControl : MonoBehaviour {
     void Update() {
         //if the last loaded level is not the main game level, the background music is not muted
         if (gameLevel == false) {
-            //audio.mute = false;
+            GetComponent<AudioSource>().mute = false;
         }
         if (gameLevel == true) {
-            //audio.mute = true;
+            GetComponent<AudioSource>().mute = true;
         }
     }
 }

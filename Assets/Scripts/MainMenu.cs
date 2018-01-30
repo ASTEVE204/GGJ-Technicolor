@@ -6,8 +6,11 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour {
 
     //Volume to be edited by slider
-    //public Slider volumeSlider;
+    public Slider volumeSlider;
     float volume = 0.5f;
+
+    //Audio for buttons
+    public AudioClip sound;
 
     //plays an audio clip and then switches to the main level when a button is clicked
     IEnumerator GameAfterAudio() {
@@ -18,8 +21,8 @@ public class MainMenu : MonoBehaviour {
             gameDataScript.masterVolume = volume;
 
         }
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel("Level 1");
     }
 
@@ -32,8 +35,8 @@ public class MainMenu : MonoBehaviour {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.masterVolume = volume;
         }
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel("Help");
     }
 
@@ -46,15 +49,15 @@ public class MainMenu : MonoBehaviour {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.masterVolume = volume;
         }
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel("Credits");
     }
 
     //plays an audio clip and then exits the game when a button is clicked
     IEnumerator QuitAfterAudio() {
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.Quit();
     }
 
@@ -92,6 +95,7 @@ public class MainMenu : MonoBehaviour {
             volume = gameDataScript.masterVolume;
             gameDataScript.masterVolume = volume;
         }
+        volumeSlider.value = volume;
     }
 
     // Update is called once per frame
@@ -104,6 +108,6 @@ public class MainMenu : MonoBehaviour {
         }
 
         //updates the assigned the value of volume to the volume slider each frame to allow for live interaction between the player-modifed volume and the playing music
-        //volume = volumeSlider.value;
+        volume = volumeSlider.value;
     }
 }

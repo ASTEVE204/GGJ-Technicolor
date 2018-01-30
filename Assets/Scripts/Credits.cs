@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Credits : MonoBehaviour {
 
+    //Audio for buttons
+    public AudioClip sound;
+
     //plays an audio clip and then switches to the main level when a button is clicked
-    IEnumerator MenuAfterAudio()
-    {
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+    IEnumerator MenuAfterAudio() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel("MainMenu");
     }
 

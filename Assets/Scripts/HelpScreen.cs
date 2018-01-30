@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class HelpScreen : MonoBehaviour {
 
+    //Audio for buttons
+    public AudioClip sound;
+
+    //plays through the tutorial clips
+    IEnumerator RunTutorial() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+        Tutorial();
+    }
+
     //plays an audio clip and then switches to the main level when a button is clicked
     IEnumerator MenuAfterAudio() {
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel("MainMenu");
     }
 
@@ -25,10 +35,16 @@ public class HelpScreen : MonoBehaviour {
 		    gameData = new GameObject("GameDataObject");
 		    gameData.AddComponent<GameData>();
 		}
+        Tutorial();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    //Used to start the tutorial clips
+    void Tutorial() {
+        StartCoroutine(RunTutorial());
+    }
 }

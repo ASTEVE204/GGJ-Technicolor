@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\MusicControl.cs" />
      <Compile Include="Assets\Scripts\PrismSpawn.cs" />
      <Compile Include="Assets\Scripts\Receiver.cs" />
+     <Compile Include="Assets\Scripts\SnowFuzz.cs" />
      <Compile Include="Assets\Scripts\Startup.cs" />
      <Compile Include="Assets\Scripts\TellyControl.cs" />
  <Reference Include="UnityEngine.UI">

@@ -4,32 +4,41 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class EndGame : MonoBehaviour {
+    
+    //Buttons that will appear depending on level completed
+    public GameObject next;
+    public GameObject menu;
 
-    //the variables declared as public are defined in the Unity Editor, the variable left private is used to store data below
-    public Button next;
-    public Button menu;
+    //Textures that will appear depending on number of moves in level completed; background they are applied to
     public Texture bitchin;
     public Texture groovy;
     public RawImage background;
+
+    //Message showing number of moves used to complete the level
     public Text complete;
-    int clicks;
+
+    //The next scene to show
+    public int noOfLevels;
     string nextScene;
 
+    //Audio clips to be assigned in Editor
+    public AudioClip button;
+    public AudioClip groovySound;
+    public AudioClip bitchinSound;
+    
+    //Audio clip to be used as level reaction
+    AudioClip sound;
+
     //processes and displays from persistent data while playing audio
-    IEnumerator AudioAndStamp() {
-        //determines if persistent data exists; displays the player's name, health and score values, and calculates a final score from it; then assigns the information to different text fields
-        GameObject gameData = GameObject.Find("GameDataObject");
-        if (gameData != null) {
-            GameData gameDataScript = gameData.GetComponent<GameData>();
-            clicks = gameDataScript.totalClicks;
-        }
+    IEnumerator DisplayResults() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         //delays between displaying information by enabling text fields (accompanied by audio) that were disabled in the Start method
-        complete.text = "level completed\nin " + clicks.ToString() + " clicks";
         yield return new WaitForSeconds(1.5f);
         if (nextScene != "MainMenu") {
-            next.enabled = true;
+            next.SetActive(true);
         } else {
-            menu.enabled = true;
+            menu.SetActive(true);
         }
     }
 
@@ -41,8 +50,8 @@ public class EndGame : MonoBehaviour {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.totalClicks = 0;
         }
-        //audio.PlayOneShot(buttonClick);
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        GetComponent<AudioSource>().PlayOneShot(button);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         Application.LoadLevel(nextScene);
     }
 
@@ -53,8 +62,6 @@ public class EndGame : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        next.enabled = false;
-        menu.enabled = false;
         //determines if persistent data exists...
         GameObject musicObject = GameObject.Find("MusicObject");
         if (musicObject != null) {
@@ -62,23 +69,33 @@ public class EndGame : MonoBehaviour {
             musicScript.gameLevel = false;
         }
         //determines if persistent data exists...
-        GameObject gameData = GameObject.Find("GameData");
+        GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            if (gameDataScript.lastLevel == "Level 1") {
-                nextScene = "Level 2";
-                background.texture = groovy;
-                StartCoroutine(AudioAndStamp());
-            } else if (gameDataScript.lastLevel == "Level 2") {
-                nextScene = "Level 3";
-                background.texture = groovy;
-                StartCoroutine(AudioAndStamp());
-            } else if (gameDataScript.lastLevel == "Level 3") {
-                nextScene = "MainMenu";
-                background.texture = bitchin;
-                StartCoroutine(AudioAndStamp());
+            string tempS = gameDataScript.lastLevel;
+            int tempI = 0;
+            if (tempS.Length == 7) {
+                tempI = int.Parse(tempS[6].ToString());
+            } else if (tempS.Length == 8) {
+                tempI = int.Parse((tempS[6].ToString()+tempS[7].ToString()));
+            } else if (tempS.Length == 9) {
+                tempI = int.Parse((tempS[6].ToString()+tempS[7].ToString()+tempS[8].ToString()));
             }
+            if (gameDataScript.totalClicks == gameDataScript.minClicks) {
+                background.texture = bitchin;
+                sound = bitchinSound;
+            } else {
+                background.texture = groovy;
+                sound = groovySound;
+            }
+            if (tempI + 1 > noOfLevels) {
+                nextScene = "MainMenu";
+            } else {
+                nextScene = "Level " + (tempI + 1).ToString();
+            }
+            complete.text = "level completed\nin " + gameDataScript.totalClicks.ToString() + " moves";
         }
+        StartCoroutine(DisplayResults());
     }
 
     // Update is called once per frame

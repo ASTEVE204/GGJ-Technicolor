@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Receiver : MonoBehaviour {
 
+    //Plane displaying 'tv snow'
     public GameObject snow;
+
+    //Boolean changes if correct particles hit the object
     public bool levelComplete = false;
 
+    //Audio for level success
+    public AudioClip sound;
+
     IEnumerator LevelCompleted() {
-        //audio.Play();
-        yield return new WaitForSeconds(/*audio.clip.length*/1);
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+        snow.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
         Application.LoadLevel("EndGame");
     }
 
@@ -20,22 +29,16 @@ public class Receiver : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //changes volume of sound to match volume stored in pers.data
-        GameObject gameData = GameObject.Find("GameDataObject");
-        if (gameData != null) {
-            GameData gameDataScript = gameData.GetComponent<GameData>();
-            gameDataScript.lastLevel = Application.loadedLevelName;
-        }
         if (levelComplete == true) {
+            GetComponent<Collider>().enabled = false;
+            levelComplete = false;
             StartCoroutine("LevelCompleted");
         }
-
     }
 
     //check the tag of the particles hitting the prism
     void OnParticleCollision(GameObject other) {
         if (other.tag == "EndParticles") {
-            snow.SetActive(true);
             levelComplete = true;
         }
     }

@@ -16,6 +16,14 @@ public class KnobControl : MonoBehaviour
     //TV switch script to reference
     public TellyControl tellyControl;
 
+    //Sound of dial turning
+    public AudioClip sound;
+
+    IEnumerator Rotate() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+    }
+
     //Use this for initialization
     void Start() {
         rot = transform.eulerAngles.z;
@@ -35,6 +43,7 @@ public class KnobControl : MonoBehaviour
     void OnMouseDown() {
         //Knob, when tapped, rotates by 22.5° around z-axis
         if (tellyControl.powerOn == false) {
+            StartCoroutine(Rotate());
             //determines if persistent data exists; displays the player's name, health and score values, and calculates a final score from it; then assigns the information to different text fields
             GameObject gameData = GameObject.Find("GameDataObject");
             if (gameData != null) {

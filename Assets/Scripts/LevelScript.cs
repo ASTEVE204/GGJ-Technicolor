@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class LevelScript : MonoBehaviour {
 
+    public int minMoves;
+
     // Use this for initialization
     void Start () {
         //determines if persistent data exists...
-        GameObject gameData = GameObject.Find("GameData");
+        GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
             gameDataScript.lastLevel = Application.loadedLevelName;
+            gameDataScript.minClicks = minMoves;
         }
         //determines if persistent data exists...
         GameObject musicObject = GameObject.Find("MusicObject");
@@ -18,7 +21,6 @@ public class LevelScript : MonoBehaviour {
 	        MusicControl musicScript = musicObject.GetComponent<MusicControl>();
 	        musicScript.gameLevel = true;
 	    }
-	    //audio.Play();
     }
 
     // Update is called once per frame

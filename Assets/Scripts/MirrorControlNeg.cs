@@ -16,6 +16,14 @@ public class MirrorControlNeg : MonoBehaviour {
     //TV switch script to reference
     public TellyControl tellyControl;
 
+    //Sound of mirror moving
+    public AudioClip sound;
+
+    IEnumerator Move() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+    }
+
     // Use this for initialization
     void Start() {
 
@@ -28,6 +36,7 @@ public class MirrorControlNeg : MonoBehaviour {
 
     void OnMouseDown() {
         if (tellyControl.powerOn == false) {
+            StartCoroutine(Move());
             //determines if persistent data exists; displays the player's name, health and score values, and calculates a final score from it; then assigns the information to different text fields
             GameObject gameData = GameObject.Find("GameDataObject");
             if (gameData != null) {

@@ -15,6 +15,14 @@ public class TellyControl : MonoBehaviour {
     //Boolean for on/off switch
     public bool powerOn = false;
 
+    //Audio for on/off switch
+    public AudioClip sound;
+
+    IEnumerator OnOff() {
+        GetComponent<AudioSource>().PlayOneShot(sound);
+        yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+    }
+
     // Use this for initialization
     void Start () {
         //particle lasers will be turned off
@@ -40,7 +48,8 @@ public class TellyControl : MonoBehaviour {
 
     //When clicking on the switch
     void OnMouseDown () {
-        if (powerOn == false) {
+        StartCoroutine(OnOff());
+         if (powerOn == false) {
             //turn the TV on
             this.gameObject.transform.eulerAngles = new Vector3(-90f, 0, -32.773f);
             powerOn = true;

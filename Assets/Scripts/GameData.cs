@@ -7,6 +7,7 @@ public class GameData : MonoBehaviour {
     //variables declared as public to be accessed by other scripts
     public float masterVolume;
     public int totalClicks;
+    public int minClicks;
     public string lastLevel;
 
     // Use this for initialization
