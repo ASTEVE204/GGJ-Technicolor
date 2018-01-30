@@ -20,7 +20,7 @@ public class EndGame : MonoBehaviour {
     //The next scene to show
     public int noOfLevels;
     string nextScene;
-
+    
     //Audio clips to be assigned in Editor
     public AudioClip button;
     public AudioClip groovySound;
@@ -72,14 +72,12 @@ public class EndGame : MonoBehaviour {
         GameObject gameData = GameObject.Find("GameDataObject");
         if (gameData != null) {
             GameData gameDataScript = gameData.GetComponent<GameData>();
-            string tempS = gameDataScript.lastLevel;
-            int tempI = 0;
-            if (tempS.Length == 7) {
-                tempI = int.Parse(tempS[6].ToString());
-            } else if (tempS.Length == 8) {
-                tempI = int.Parse((tempS[6].ToString()+tempS[7].ToString()));
-            } else if (tempS.Length == 9) {
-                tempI = int.Parse((tempS[6].ToString()+tempS[7].ToString()+tempS[8].ToString()));
+            string tempS = gameDataScript.lastLevel.Substring(6,(gameDataScript.lastLevel.Length - 6));
+            int tempI = int.Parse(tempS);
+            if (tempI + 1 > noOfLevels) {
+                nextScene = "MainMenu";
+            } else {
+                nextScene = "Level " + (tempI + 1).ToString();
             }
             if (gameDataScript.totalClicks == gameDataScript.minClicks) {
                 background.texture = bitchin;
@@ -87,11 +85,6 @@ public class EndGame : MonoBehaviour {
             } else {
                 background.texture = groovy;
                 sound = groovySound;
-            }
-            if (tempI + 1 > noOfLevels) {
-                nextScene = "MainMenu";
-            } else {
-                nextScene = "Level " + (tempI + 1).ToString();
             }
             complete.text = "level completed\nin " + gameDataScript.totalClicks.ToString() + " moves";
         }
